@@ -11,6 +11,8 @@ BRIGHT_GREEN = (0,255,0)
 GREEN = (0,200,0)
 BLUE = (0,0,255)
 YELLOW = (255,255,0)
+MAGENTA = (255,0,255)
+CYAN = (0,255,255)
 
 TITLE = 'Movement'
 #changing width and height to anything under 1309 then exitting game with red x

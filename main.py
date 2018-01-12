@@ -52,6 +52,14 @@ class Game:
         #after drawing everything, flip the display
         pg.display.flip()
 
+    def show_start_screen(self):
+        # game splash/start screen
+        pass
+
+    def show_go_screen(self):
+        # game over/continue
+        pass
+
 def text_objects(text,font,colour):
     textSurface = font.render(text,True,colour)
     return textSurface,textSurface.get_rect()
@@ -101,6 +109,48 @@ def button(msg,x,y,w,h,ic,ac,action=None):
     textRect.center = ((x+(w/2),(y+(h/2))))
     gameDisplay.blit(textSurf,textRect)
 
+def tank_subclasses():
+    tank_intro = True
+    while tank_intro:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                quit()
+        gameDisplay.fill(BLACK)
+        button("Knight",WIDTH*0.25,HEIGHT*0.1,WIDTH / 2,HEIGHT / 10,WHITE,GREEN,knight)
+        button("TBA",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,YELLOW)
+        button("Quit",WIDTH*0.25,HEIGHT*0.8,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
+        pg.display.update()
+        clock.tick(15)
+
+def hunter_subclasses():
+    hunter_intro = True
+    while hunter_intro:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                quit()
+        gameDisplay.fill(BLACK)
+        button("Thief",WIDTH*0.25,HEIGHT*0.1,WIDTH / 2,HEIGHT / 10,WHITE,RED,thief)
+        button("Ninja",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,MAGENTA,ninja)
+        button("Quit",WIDTH*0.25,HEIGHT*0.8,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
+        pg.display.update()
+        clock.tick(15)
+
+def mage_subclasses():
+    mage_intro = True
+    while mage_intro:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                quit()
+        gameDisplay.fill(BLACK)
+        button("Wizard",WIDTH*0.25,HEIGHT*0.3,WIDTH / 2,HEIGHT / 10,WHITE,BLUE,wizard)
+        button("TBA",WIDTH*0.25,HEIGHT*0.6,WIDTH / 2,HEIGHT / 10,WHITE,CYAN)
+        button("Quit",WIDTH*0.25,HEIGHT*0.8,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
+        pg.display.update()
+        clock.tick(15)
+
 def character_select():
     char_intro = True
     while char_intro:
@@ -109,11 +159,10 @@ def character_select():
                 pg.quit()
                 quit()
         gameDisplay.fill(BLACK)
-        button("Knight",WIDTH*0.25,HEIGHT*0.05,WIDTH / 2,HEIGHT / 10,WHITE,RED,knight)
-        button("Wizard",WIDTH*0.25,HEIGHT*0.25,WIDTH / 2,HEIGHT / 10,WHITE,GREEN,wizard)
-        button("Thief",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,BLUE,thief)
-        button("Ninja",WIDTH*0.25,HEIGHT*0.65,WIDTH / 2,HEIGHT / 10, WHITE, YELLOW,ninja)
-        button("Quit",WIDTH*0.25,HEIGHT*0.85,WIDTH / 2,HEIGHT / 10,WHITE,RED,quitgame)
+        button("Tank",WIDTH*0.25,HEIGHT*0.25,WIDTH / 2,HEIGHT / 10,WHITE,RED,tank_subclasses)
+        button("Mage",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,GREEN,mage_subclasses)
+        button("Hunter",WIDTH*0.25,HEIGHT*0.65,WIDTH / 2,HEIGHT / 10,WHITE,BLUE,hunter_subclasses)
+        button("Quit",WIDTH*0.25,HEIGHT*0.85,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
         pg.display.update()
         clock.tick(15)
 

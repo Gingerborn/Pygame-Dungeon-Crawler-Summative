@@ -35,6 +35,7 @@ warlock_folder = os.path.join(img_folder,'WARLOCK')
 thief_folder = os.path.join(img_folder,'THIEF')
 ninja_folder = os.path.join(img_folder,'NINJA')
 barb_folder = os.path.join(img_folder,'BARBARIAN')
+secret_folder = os.path.join(img_folder,'TANK')
 sound_folder = os.path.join(game_folder,'SOUND')
 music_POWER = os.path.join(sound_folder,'Power.wav')
 folder = knight_folder

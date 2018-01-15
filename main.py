@@ -139,6 +139,12 @@ def thief():
     while g.running:
         g.new(folder)
 
+def secret_tank():
+    folder = secret_folder
+    g = Game(folder)
+    while g.running:
+        g.new(folder)
+
 def quitgame():
     pg.quit()
     quit()
@@ -212,6 +218,7 @@ def character_select():
         button("Tank",WIDTH*0.25,HEIGHT*0.25,WIDTH / 2,HEIGHT / 10,WHITE,RED,tank_subclasses)
         button("Mage",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,GREEN,mage_subclasses)
         button("Hunter",WIDTH*0.25,HEIGHT*0.65,WIDTH / 2,HEIGHT / 10,WHITE,BLUE,hunter_subclasses)
+        button("Secret",0,HEIGHT - 50,100,50,BLACK,WHITE,secret_tank)
         button("Quit",WIDTH*0.25,HEIGHT*0.85,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
         pg.display.update()
         clock.tick(15)

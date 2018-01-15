@@ -1,15 +1,18 @@
-#jumpy platform game
+#dungeon crawler computer science 30 final project
 import pygame as pg
 import random
 from settings import *
 from sprites import *
 
 pg.init()
+pg.mixer.music.load(music_POWER)
+pause = False
 
 class Game:
     def __init__(self,folder):
         #initialize game window
         pg.mixer.init()
+        pg.mixer.music.play(-1)
         self.screen = pg.display.set_mode((WIDTH,HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
@@ -44,6 +47,9 @@ class Game:
                 if self.playing:
                     self.playing = False
                 self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    paused()
 
     def draw(self):
         #game loop - draw
@@ -51,6 +57,9 @@ class Game:
         self.all_sprites.draw(self.screen)
         #after drawing everything, flip the display
         pg.display.flip()
+
+##    def close(self):
+##        self.running = False
 
     def show_start_screen(self):
         # game splash/start screen
@@ -60,9 +69,39 @@ class Game:
         # game over/continue
         pass
 
+def unpause():
+    global pause
+    pg.mixer.music.unpause()
+    pause = False
+
+def paused():
+    global pause
+    pause = True
+    pg.mixer.music.pause()
+    while pause:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                quit()
+        gameDisplay.fill(BLACK)
+        largeText = pg.font.Font('freesansbold.ttf',115)
+        TextSurf, TextRect = text_objects('Paused',largeText,WHITE)
+        TextRect.center = ((WIDTH/2,HEIGHT/2))
+        gameDisplay.blit(TextSurf,TextRect)
+
+        button("Continue!",WIDTH*0.15,WIDTH*0.75,100,50,GREEN,BRIGHT_GREEN,unpause)
+##        button("Character Select",WIDTH*0.45,WIDTH*0.75,200,50,BLUE,BRIGHT_BLUE,go_back)
+        button("Quit",WIDTH*0.8,WIDTH*0.75,100,50,RED,BRIGHT_RED,quitgame)
+        pg.display.update()
+        clock.tick(15)
+
 def text_objects(text,font,colour):
     textSurface = font.render(text,True,colour)
     return textSurface,textSurface.get_rect()
+
+##def go_back():
+##    Game.close()
+##    character_select()
 
 def ninja():
     folder = ninja_folder
@@ -70,15 +109,26 @@ def ninja():
     while g.running:
         g.new(folder)
         
-
 def knight():
     folder = knight_folder
     g = Game(folder)
     while g.running:
         g.new(folder)
 
+def barbarian():
+    folder = barb_folder
+    g = Game(folder)
+    while g.running:
+        g.new(folder)
+
 def wizard():
     folder = wizard_folder
+    g = Game(folder)
+    while g.running:
+        g.new(folder)
+
+def warlock():
+    folder = warlock_folder
     g = Game(folder)
     while g.running:
         g.new(folder)
@@ -118,7 +168,7 @@ def tank_subclasses():
                 quit()
         gameDisplay.fill(BLACK)
         button("Knight",WIDTH*0.25,HEIGHT*0.1,WIDTH / 2,HEIGHT / 10,WHITE,GREEN,knight)
-        button("TBA",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,YELLOW)
+        button("Barbarian",WIDTH*0.25,HEIGHT*0.45,WIDTH / 2,HEIGHT / 10,WHITE,YELLOW,barbarian)
         button("Quit",WIDTH*0.25,HEIGHT*0.8,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
         pg.display.update()
         clock.tick(15)
@@ -146,7 +196,7 @@ def mage_subclasses():
                 quit()
         gameDisplay.fill(BLACK)
         button("Wizard",WIDTH*0.25,HEIGHT*0.3,WIDTH / 2,HEIGHT / 10,WHITE,BLUE,wizard)
-        button("TBA",WIDTH*0.25,HEIGHT*0.6,WIDTH / 2,HEIGHT / 10,WHITE,CYAN)
+        button("Warlock",WIDTH*0.25,HEIGHT*0.6,WIDTH / 2,HEIGHT / 10,WHITE,CYAN,warlock)
         button("Quit",WIDTH*0.25,HEIGHT*0.8,WIDTH / 2,HEIGHT / 10,WHITE,BRIGHT_RED,quitgame)
         pg.display.update()
         clock.tick(15)
